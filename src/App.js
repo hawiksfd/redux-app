@@ -1,7 +1,7 @@
 import React from "react";
 function App() {
   return (
-    <div>
+    <div className="container">
       <h1> Hello from App.js</h1>
     </div>
   );
