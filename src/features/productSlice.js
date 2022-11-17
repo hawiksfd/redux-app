@@ -14,6 +14,18 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+// buat control create product
+export const createProducts = createAsyncThunk(
+  "products/createProduct",
+  async ({ title, price }) => {
+    const response = await axios.post("http://localhost:5000/products", {
+      title,
+      price,
+    });
+    return response.data;
+  }
+);
+
 // buat entity adapter
 const productEntity = createEntityAdapter({
   selectId: (product) => product.id,
@@ -26,6 +38,9 @@ const productSlice = createSlice({
   extraReducers: {
     [getProducts.fulfilled]: (state, action) => {
       productEntity.setAll(state, action.payload);
+    },
+    [createProducts.fulfilled]: (state, action) => {
+      productEntity.addOne(state, action.payload);
     },
   },
 });
