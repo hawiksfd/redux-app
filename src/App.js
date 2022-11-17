@@ -1,9 +1,16 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ShowProduct from "./components/ShowProduct";
+
 function App() {
   return (
-    <div className="container">
-      <h1> Hello from App.js</h1>
-    </div>
+    <BrowserRouter>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<ShowProduct />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
