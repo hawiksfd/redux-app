@@ -26,6 +26,15 @@ export const createProducts = createAsyncThunk(
   }
 );
 
+// buat control delete product
+export const deleteProducts = createAsyncThunk(
+  "products/deleteProduct",
+  async (id) => {
+    await axios.delete(`http://localhost:5000/products/${id}`);
+    return id;
+  }
+);
+
 // buat entity adapter
 const productEntity = createEntityAdapter({
   selectId: (product) => product.id,
@@ -41,6 +50,9 @@ const productSlice = createSlice({
     },
     [createProducts.fulfilled]: (state, action) => {
       productEntity.addOne(state, action.payload);
+    },
+    [deleteProducts.fulfilled]: (state, action) => {
+      productEntity.removeOne(state, action.payload);
     },
   },
 });
